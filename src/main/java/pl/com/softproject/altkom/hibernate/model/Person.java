@@ -5,11 +5,16 @@
 package pl.com.softproject.altkom.hibernate.model;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -27,6 +32,9 @@ public class Person implements Serializable {
     @ManyToOne
 //    @JoinColumn(name = "team_id")
     private Team team;
+    
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    private List<Message> message;
     
     public Long getId() {
         return id;
@@ -52,9 +60,17 @@ public class Person implements Serializable {
         this.team = team;
     }
 
+    public List<Message> getMessage() {
+        return message;
+    }
+
+    public void setMessage(List<Message> message) {
+        this.message = message;
+    }
+        
     @Override
     public String toString() {
-        return "Person{" + "id=" + id + ", name=" + name + '}';
+        return "Person{" + "id=" + id + ", name=" + name + ", message" + message.toString() + '}';
     }
  
     
