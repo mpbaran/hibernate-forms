@@ -5,7 +5,9 @@ package pl.com.softproject.altkom.hibernate;
 
 import org.hibernate.Session;
 import pl.com.softproject.altkom.hibernate.dao.PersonDAO;
+import pl.com.softproject.altkom.hibernate.dao.TeamDAO;
 import pl.com.softproject.altkom.hibernate.model.Person;
+import pl.com.softproject.altkom.hibernate.model.Team;
 
 /**
  *
@@ -23,13 +25,20 @@ public class Main {
             session.beginTransaction();
 
             PersonDAO dao = new PersonDAO();
-            Person person = dao.load(1l);
+//            Person person = dao.load(1l);
+            TeamDAO teamDAO = new TeamDAO();
             
-            if(person == null)
-                person = new Person();
-            person.setName("Krzychu");
+            Team t = teamDAO.load(2L);
+            System.out.println(t.toString());
+           Person p = new Person();
+            if(t != null)
+             p.setTeam(t);
+           p.setName("Miro");
+//            if(person == null)
+//                person = new Person();
+//            person.setName("Krzychu");
             
-            dao.save(person);
+            dao.save(p);
 
             System.out.println("end");
 
