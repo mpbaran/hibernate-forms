@@ -25,7 +25,9 @@ public class Main {
             PersonDAO dao = new PersonDAO();
             Person person = dao.load(1l);
             
-            person.setName("test");
+            if(person == null)
+                person = new Person();
+            person.setName("Krzychu");
             
             dao.save(person);
 
